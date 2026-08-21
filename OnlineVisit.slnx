@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="Application/OnlineVisit.Application/OnlineVisit.Application.csproj" />
-  <Project Path="Doamin/OnlineVisit.Domain/OnlineVisit.Domain.csproj" />
+  <Project Path="Domain/OnlineVisit.Domain/OnlineVisit.Domain.csproj" />
   <Project Path="Infrastructure/OnlineVisit.Infrastructure/OnlineVisit.Infrastructure.csproj" />
 </Solution>
