@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineVisit.Application.Interfaces;
 using OnlineVisit.Infrastructure.DataAccessManager;
+using OnlineVisit.Infrastructure.DataAccessManager.Repositories;
 
 namespace OnlineVisit.Infrastructure
 {
@@ -17,6 +19,7 @@ namespace OnlineVisit.Infrastructure
         {
             AddDatabase(services, configuration);
             AddIdentity(services);
+            AddRepositories(services);
 
             return services;
         }
@@ -51,6 +54,25 @@ namespace OnlineVisit.Infrastructure
                 })
                 .AddEntityFrameworkStores<OnlineVisitDbContext>()
                 .AddDefaultTokenProviders();
+        }
+
+
+        private static void AddRepositories(
+            IServiceCollection services)
+        {
+            services.AddScoped(
+                typeof(IRepository<>),
+                typeof(Repository<>));
+
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+            services.AddScoped<IPatientRepository, PatientRepository>();
+
+            services.AddScoped<
+                IAppointmentRepository,
+                AppointmentRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
